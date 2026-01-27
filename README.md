@@ -1,7 +1,7 @@
 # Winter PEP Program – Python, Full Stack & Cloud Computing
 
 ## About This Repository
-This repository is created as part of the **Winter PEP (Professional Enhancement Program)**.
+This repository is created as part of the **Winter PEP **.
 The program provides an opportunity to learn and enhance skills in the following domains:
 - Python Programming
 - Python Full Stack Development
