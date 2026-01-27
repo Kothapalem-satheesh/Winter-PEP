@@ -1,6 +1,5 @@
 # DAY-3 DataTypes and understanding slicing advanced slicing techniques
 
----
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -1337,5 +1336,6 @@ Practice these concepts regularly with different data types and slicing patterns
 12. Parse and validate a credit card number format using slicing
 
 ---
+
 
 
