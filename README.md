@@ -1,4 +1,4 @@
-
+<<<<<<<HEAD
 # ❄️ Winter PEP Program – Python, Full Stack & Cloud Computing 🚀
 
 ## 📌 About This Repository
@@ -39,4 +39,4 @@ This repository acts as a **learning tracker and practice space** during the Win
 
 ✨ *Learning in progress…*
 =======
-
+>>>>>
