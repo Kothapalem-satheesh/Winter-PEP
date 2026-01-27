@@ -2,18 +2,15 @@
 
 ## Overview
 
-Day 1 focuses on building a strong foundation in programming by understanding how a computer works internally, basic hardware components, memory, operating systems, and the fundamentals of programming and Python.
+Day 1 focuses on building a strong foundation in programming by understanding how a computer works internally, including basic hardware components, memory, operating systems, and the fundamentals of programming and Python.
 
 ---
 
 ## Computer Fundamentals
 
-<img width="504" height="372" alt="image" src="https://github.com/user-attachments/assets/d3e5c53b-6d5d-482f-85db-cc1eb642109f" />
+<img width="504" height="372" alt="Computer Fundamentals" src="https://github.com/user-attachments/assets/d3e5c53b-6d5d-482f-85db-cc1eb642109f" />
 
-
-To build a strong programming foundation, it is essential to understand the
-basic components of a computer system, including input and output devices,
-the CPU, memory, and the operating system.
+To build a strong programming foundation, it is essential to understand the basic components of a computer system, including input and output devices, the CPU, memory, and the operating system.
 
 ---
 
@@ -109,8 +106,6 @@ They are grouped into three main categories.
 - Store – moves data from a register to memory
 - Move – transfers data between registers
 
----
-
 ### Arithmetic and Logic Instructions
 
 **Arithmetic Instructions**
@@ -124,8 +119,6 @@ They are grouped into three main categories.
 - OR
 - NOT
 - XOR
-
----
 
 ### Control Instructions
 
@@ -150,7 +143,8 @@ Programming languages allow humans to write instructions in a readable form that
 ---
 
 ## Compilers and Interpreters
-<img width="493" height="312" alt="image" src="https://github.com/user-attachments/assets/3c36dad8-0601-41e3-8cb5-eccffd9cb51e" />
+
+<img width="493" height="312" alt="Compiler vs Interpreter" src="https://github.com/user-attachments/assets/3c36dad8-0601-41e3-8cb5-eccffd9cb51e" />
 
 High-level programs are converted into machine code using:
 
@@ -158,30 +152,39 @@ High-level programs are converted into machine code using:
 - **Interpreter** – executes the program line by line
 
 ---
+
 ## Why Do We Need Programming Languages?
 
 A computer is very powerful, but it understands only **0s and 1s**.  
-Humans, however, think and communicate using words and logic, not binary numbers.
+Humans think and communicate using words and logic, not binary numbers.
 
-Writing instructions directly in 0s and 1s is very hard for humans.  
-So, **programming languages** were created to make communication with computers easy.
+Writing instructions directly in binary is very difficult.  
+Programming languages like **C, Java, and Python** allow humans to write instructions in a readable and structured way.
 
-Languages like **C, Java, Python**, and others allow us to write instructions in a readable and structured way.  
-The computer cannot understand these languages directly, so tools like **compilers** and **interpreters** translate them into binary for the CPU to execute.
+Compilers and interpreters translate these instructions into binary so the CPU can execute them.
 
 ---
+
 ## Download and Install Python (Quick Steps)
 
 1. Go to **https://www.python.org** and download the latest **Python 3** version.
 2. Run the downloaded installer (`.exe` on Windows).
-3. <img width="493" height="312" alt="image" src="https://github.com/user-attachments/assets/c3015d86-e3bb-4f9a-8631-923ad2390ee2" />
-4. **Check “Add Python to PATH”** and click **Install Now**
-5. <img width="493" height="312" alt="image" src="https://github.com/user-attachments/assets/8c8e9973-e948-4cc4-ae95-87a7c5d32bff" />
-6. After installation, open **Command Prompt / PowerShell**.
-7. <img width="290" height="300" alt="image" src="https://github.com/user-attachments/assets/af378c42-9c81-4271-bc99-4592cdfd3612" />
-8. Type `python --version` to verify installation.
-9. If the version is displayed, Python is installed successfully.
+
+<img width="493" height="312" alt="Python Installer" src="https://github.com/user-attachments/assets/c3015d86-e3bb-4f9a-8631-923ad2390ee2" />
+
+3. Check **“Add Python to PATH”** and click **Install Now**.
+
+<img width="493" height="312" alt="Add Python to PATH" src="https://github.com/user-attachments/assets/8c8e9973-e948-4cc4-ae95-87a7c5d32bff" />
+
+4. After installation, open **Command Prompt / PowerShell**.
+
+<img width="290" height="300" alt="Python Version Check" src="https://github.com/user-attachments/assets/af378c42-9c81-4271-bc99-4592cdfd3612" />
+
+5. Type `python --version` to verify installation.
+6. If the version is displayed, Python is installed successfully.
+
 ---
+
 ## Introduction to Python
 
 Python is a high-level programming language known for its simple and readable syntax.
@@ -192,11 +195,12 @@ Key features:
 - Automatically manages data types
 - Supports multiple programming styles
 
-### Example: Hello World Program
-<img width="493" height="312" alt="image" src="https://github.com/user-attachments/assets/6f9e91d5-0364-48d2-b5c4-f3828088584c" />
+---
+
+## Example: Hello World Program
+
+<img width="493" height="312" alt="Hello World Program" src="https://github.com/user-attachments/assets/6f9e91d5-0364-48d2-b5c4-f3828088584c" />
 
 ```python
 # This is a comment
 print("Hello, World!")
-
-
