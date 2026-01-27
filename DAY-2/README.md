@@ -1,4 +1,6 @@
-# 🧙‍♂️ Python Magic: The Variable Chronicles
+# 🗓️ Day 2: Entering the Kingdom of Data Types
+
+🧙‍♂️ Python Magic: The Variable Chronicles
 
 Welcome to this beginner-friendly guide to understanding Variables in Python! This README serves as a quick-start cheat sheet for new wizards of code.
 
@@ -139,3 +141,4 @@ print(type("Magic"))      # <class 'str'>
 print(type(True))         # <class 'bool'>
 print(type([1, 2, 3]))    # <class 'list'>
 ```
+
