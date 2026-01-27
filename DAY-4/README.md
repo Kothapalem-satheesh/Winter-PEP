@@ -1,7 +1,6 @@
-# The Complete Guide to Conditional Statements and Loops
-## From Beginner to Advanced - A Story-Driven Journey
-
----
+# Day 4 – Conditional Logic, Loops & Comprehensions
+## Overview
+Day 4 focuses on building control flow skills in Python, including making decisions with conditional statements, repeating tasks using loops, controlling loop behavior with continue, break, and pass, and writing clean, concise code using list, dictionary, and set comprehensions.
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -1133,4 +1132,4 @@ Remember: Every professional programmer started exactly where you are now. The k
 
 ---
 
-**Happy Learning! If you have questions, revisit the relevant section and practice with real examples.** 📚
+
