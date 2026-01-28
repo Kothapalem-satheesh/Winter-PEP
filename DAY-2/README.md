@@ -1,11 +1,5 @@
 # 🗓️ Day 2: Entering the Kingdom of Data Types
 
-🧙‍♂️ Python Magic: The Variable Chronicles
-
-Welcome to this beginner-friendly guide to understanding Variables in Python! This README serves as a quick-start cheat sheet for new wizards of code.
-
----
-
 ## 🧙‍♂️ What Are Variables?
 Variables are like **labeled treasure chests**. You can put anything inside them — a number, a word, a list, or even a spell (function) — and give them a name so you can find them later.
 
@@ -141,4 +135,5 @@ print(type("Magic"))      # <class 'str'>
 print(type(True))         # <class 'bool'>
 print(type([1, 2, 3]))    # <class 'list'>
 ```
+
 
