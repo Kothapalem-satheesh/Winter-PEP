@@ -1,1710 +1,1636 @@
-# DAY-6 Object-Oriented Programming (OOP) 
-## From Beginner to Advanced 
+# DAY-6 Functions From Beginner to Advanced
 
 ---
 
 ## 📑 Table of Contents
-1. [Introduction to OOP](#introduction-to-oop)
-2. [Classes and Objects](#classes-and-objects)
-3. [Attributes and Methods](#attributes-and-methods)
-4. [Constructors and Initialization](#constructors-and-initialization)
-5. [Encapsulation](#encapsulation)
-6. [Inheritance](#inheritance)
-7. [Polymorphism](#polymorphism)
-8. [Abstraction](#abstraction)
-9. [Special Methods (Dunder Methods)](#special-methods-dunder-methods)
-10. [Class vs Instance Variables](#class-vs-instance-variables)
-11. [Static and Class Methods](#static-and-class-methods)
-12. [Properties and Decorators](#properties-and-decorators)
-13. [Composition](#composition)
-14. [Advanced OOP Concepts](#advanced-oop-concepts)
-15. [Design Patterns](#design-patterns)
-16. [Practical Applications](#practical-applications)
-17. [Best Practices](#best-practices)
+1. [Introduction to Functions](#introduction-to-functions)
+2. [Basic Functions (Beginner)](#basic-functions-beginner)
+3. [Function Parameters & Arguments](#function-parameters--arguments)
+4. [Return Values](#return-values)
+5. [Function Scope](#function-scope)
+6. [Advanced Function Types](#advanced-function-types)
+7. [Decorators](#decorators)
+8. [Lambda Functions](#lambda-functions)
+9. [Map, Filter & Reduce](#map-filter--reduce)
+10. [Closures](#closures)
+11. [Practical Applications](#practical-applications)
+12. [Best Practices & Optimization](#best-practices--optimization)
 
 ---
 
-## Introduction to OOP
+## Introduction to Functions
 
-### What is Object-Oriented Programming? - The Restaurant Story 🍽️
+### What are Functions? - The Bakery Recipe Story 📖
 
-Imagine you're opening a restaurant. In real life, you need to think about different things:
+Imagine you own a bakery. Every morning, you make chocolate chip cookies. Here's what happens:
 
 ```
-┌─────────────────────────────────────────────────┐
-│           THE RESTAURANT                        │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│  🍽️  OBJECT: Chef "Alice"                      │
-│      Attributes:                                │
-│      • Name: Alice                              │
-│      • Experience: 10 years                     │
-│      • Specialty: Italian Cuisine               │
-│                                                 │
-│      Methods:                                   │
-│      • cook_pasta()                             │
-│      • make_sauce()                             │
-│      • taste_food()                             │
-│                                                 │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│  🍴 OBJECT: Dish "Pasta Carbonara"             │
-│      Attributes:                                │
-│      • Name: Pasta Carbonara                    │
-│      • Price: $15                               │
-│      • Calories: 450                            │
-│                                                 │
-│      Methods:                                   │
-│      • serve()                                  │
-│      • get_price()                              │
-│      • is_vegetarian()                          │
-│                                                 │
-└─────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│          THE COOKIE-MAKING PROCESS                  │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  Step 1: Gather ingredients                        │
+│          ✓ 2 cups flour                            │
+│          ✓ 1 cup butter                            │
+│          ✓ 1 cup chocolate chips                   │
+│                                                     │
+│  Step 2: Mix ingredients                           │
+│  Step 3: Shape into cookies                        │
+│  Step 4: Bake for 12 minutes                       │
+│  Step 5: Cool and serve                            │
+│                                                     │
+└─────────────────────────────────────────────────────┘
 ```
 
-**Object-Oriented Programming (OOP)** is about organizing your code by creating **objects** that represent real-world things.
+Every morning, you repeat these exact same steps. Wouldn't it be great if you could just say:
+> **"Make chocolate chip cookies!"**
 
-Instead of writing procedures that do things, you create objects that:
-- **Have properties** (attributes) - like name, age, color
-- **Can do things** (methods) - like walk(), eat(), sleep()
+And the bakery automatically does all those steps? That's exactly what functions do!
 
-**Why OOP Matters:**
-- 🏗️ **Real-world modeling**: Code mirrors reality
-- 🔄 **Reusability**: Create once, reuse everywhere
-- 🛡️ **Maintainability**: Changes are isolated
-- 📦 **Organization**: Related code stays together
-- 🎯 **Scalability**: Easier to build large programs
-- 🧩 **Modularity**: Break problems into pieces
+**A function is a reusable block of code that performs a specific task.**
+
+Instead of writing the same code over and over:
+
+```python
+# ❌ WITHOUT FUNCTIONS - Tedious repetition
+print("Gathering ingredients...")
+print("Mixing ingredients...")
+print("Shaping cookies...")
+print("Baking for 12 minutes...")
+print("Cooling cookies...")
+
+# Do this again... and again... and again for each batch
+print("Gathering ingredients...")
+print("Mixing ingredients...")
+# ... (repetitive!)
+```
+
+You write a function once:
+
+```python
+# ✅ WITH FUNCTIONS - Write once, use many times
+def make_cookies():
+    print("Gathering ingredients...")
+    print("Mixing ingredients...")
+    print("Shaping cookies...")
+    print("Baking for 12 minutes...")
+    print("Cooling cookies...")
+
+# Then use it whenever you want!
+make_cookies()  # First batch
+make_cookies()  # Second batch
+make_cookies()  # Third batch
+```
+
+**Why Functions Matter:**
+- 🔄 **Reusability**: Write once, use infinite times
+- 📦 **Organization**: Keep code organized and neat
+- 🐛 **Easy to Debug**: Fix one place, fixes everywhere
+- 📖 **Readability**: Code tells a story
+- 🎯 **Focus**: Each function does one thing well
 
 ---
 
-## Classes and Objects
+## Basic Functions (Beginner)
 
-### Understanding Classes vs Objects 🎯
-
-A **class** is a blueprint or template. An **object** is an actual instance created from that blueprint.
-
-```
-┌─────────────────────────────────────┐
-│   BLUEPRINT vs ACTUAL ITEM          │
-├─────────────────────────────────────┤
-│                                     │
-│  CLASS: Cookie Recipe               │
-│  ────────────────────────────────   │
-│  A piece of paper with              │
-│  instructions to make cookies       │
-│                                     │
-│  OBJECT: Actual Cookie              │
-│  ────────────────────────────────   │
-│  A real cookie you can eat!         │
-│  Made from the recipe               │
-│                                     │
-│  One recipe → Many cookies!         │
-│                                     │
-└─────────────────────────────────────┘
-```
-
-### Creating Your First Class
+### Creating Your First Function
 
 ```python
-# STEP 1: Define the class (blueprint)
-class Person:
-    """A class representing a person"""
-    pass  # Will add details soon
+def greet():
+    """This function greets the user"""
+    print("Hello! Welcome to my program!")
 
-# STEP 2: Create objects (instances)
-alice = Person()   # Create object 1
-bob = Person()     # Create object 2
+# Call the function
+greet()  # Output: Hello! Welcome to my program!
 
-print(type(alice))  # Output: <class '__main__.Person'>
-print(type(bob))    # Output: <class '__main__.Person'>
-
-# Both alice and bob are instances of Person class
+# Call it again!
+greet()  # Output: Hello! Welcome to my program!
+greet()  # Output: Hello! Welcome to my program!
 ```
 
-### A Real Example: Car Class
+**Function Structure:**
+
+```
+def function_name():      ← Function definition
+    """Documentation"""   ← What it does (optional but recommended)
+    # Code here           ← Body (what actually runs)
+    # More code...        ← Can have multiple lines
+
+function_name()           ← Function call (actually run it)
+```
+
+### Naming Functions - The Convention 📋
 
 ```python
-class Car:
-    """A class representing a car"""
-    
-    # Attributes (properties)
-    brand = "Toyota"
-    color = "Red"
-    year = 2024
-    speed = 0
+# ✅ GOOD function names (clear, lowercase, descriptive)
+def calculate_total():
+    pass
 
-# Create car objects
-my_car = Car()
-print(my_car.brand)  # Output: Toyota
-print(my_car.color)  # Output: Red
-print(my_car.year)   # Output: 2024
+def send_email():
+    pass
 
-# Create another car
-friend_car = Car()
-print(friend_car.brand)  # Output: Toyota (same class, same values)
+def is_valid_email(email):
+    pass
+
+# ❌ BAD function names (unclear, confusing)
+def func():
+    pass
+
+def x():
+    pass
+
+def DOTHETHING():
+    pass
+
+def Calculate():  # Should be lowercase
+    pass
 ```
 
-**Visual Representation:**
-
-```
-┌──────────────────────────────────────┐
-│      CLASS: Car (Blueprint)          │
-├──────────────────────────────────────┤
-│  Attributes:                         │
-│  • brand                             │
-│  • color                             │
-│  • year                              │
-│  • speed                             │
-└──────────────────────────────────────┘
-         ↓ (creates)
-    ┌────────┬────────┐
-    ↓        ↓        ↓
-  my_car  friend_car other_car
-  (object) (object)  (object)
-```
+**Rules for Function Names:**
+- Start with letter or underscore `_`
+- Can contain letters, numbers, underscores
+- Use lowercase with underscores (snake_case)
+- Be descriptive - a name should tell you what it does
+- Don't use Python keywords (if, for, etc.)
 
 ---
 
-## Attributes and Methods
+## Function Parameters & Arguments
 
-### Attributes - Properties of Objects 📋
+### Understanding Parameters vs Arguments 🎯
 
-Attributes are variables that belong to an object:
-
-```python
-class Dog:
-    """A class representing a dog"""
-    
-    # Class attributes (shared by all dogs)
-    species = "Canis familiaris"
-    
-    # We'll set instance attributes later in __init__
-
-# Create a dog object
-my_dog = Dog()
-print(my_dog.species)  # Output: Canis familiaris
-
-# Set instance attributes directly
-my_dog.name = "Buddy"
-my_dog.age = 3
-my_dog.color = "Golden"
-
-print(my_dog.name)   # Output: Buddy
-print(my_dog.age)    # Output: 3
-print(my_dog.color)  # Output: Golden
-```
-
-### Methods - Actions Objects Can Perform 🎬
-
-Methods are functions that belong to a class:
+**Parameters** = Placeholders in the function definition
+**Arguments** = Actual values you pass when calling the function
 
 ```python
-class Dog:
-    """A dog class with methods"""
-    
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-    
-    def bark(self):
-        """Make the dog bark"""
-        return f"{self.name} says: Woof! Woof!"
-    
-    def get_age(self):
-        """Return the dog's age"""
-        return f"{self.name} is {self.age} years old"
-    
-    def have_birthday(self):
-        """Increase the dog's age"""
-        self.age += 1
-        return f"Happy birthday! {self.name} is now {self.age} years old"
+#                     ↓ Parameter (placeholder)
+def introduce(name):
+    print(f"Hello, my name is {name}")
 
-# Create and use
-buddy = Dog("Buddy", 3)
-
-print(buddy.bark())              # Output: Buddy says: Woof! Woof!
-print(buddy.get_age())           # Output: Buddy is 3 years old
-print(buddy.have_birthday())     # Output: Happy birthday! Buddy is now 4 years old
+#              ↓ Argument (actual value)
+introduce("Alice")   # Output: Hello, my name is Alice
+introduce("Bob")     # Output: Hello, my name is Bob
 ```
 
-**Understanding `self` Parameter:**
+**Visual Comparison:**
 
-The `self` parameter refers to the object itself. It's how the object accesses its own attributes:
+```
+┌──────────────────────────────────────────┐
+│   PARAMETERS vs ARGUMENTS                │
+├──────────────────────────────────────────┤
+│                                          │
+│  def greet(name):  ← name = PARAMETER    │
+│      print(name)                         │
+│                                          │
+│  greet("Alice")    ← "Alice" = ARGUMENT  │
+│                                          │
+└──────────────────────────────────────────┘
+```
+
+### Single Parameter Example
 
 ```python
-class Person:
-    def __init__(self, name):
-        self.name = name  # self.name = this person's name
+# Story: You're ordering pizza
+def order_pizza(size):
+    """Order a pizza of specific size"""
+    if size == "small":
+        price = "$10"
+    elif size == "medium":
+        price = "$15"
+    else:
+        price = "$20"
     
-    def greet(self):
-        return f"Hello, I'm {self.name}"  # self.name = this person's name
+    print(f"You ordered a {size} pizza for {price}")
 
-alice = Person("Alice")
-print(alice.greet())  # Output: Hello, I'm Alice
-
-bob = Person("Bob")
-print(bob.greet())    # Output: Hello, I'm Bob
-
-# Each object has its own self!
+# Calling the function with different arguments
+order_pizza("small")   # Output: You ordered a small pizza for $10
+order_pizza("medium")  # Output: You ordered a medium pizza for $15
+order_pizza("large")   # Output: You ordered a large pizza for $20
 ```
 
----
-
-## Constructors and Initialization
-
-### The __init__ Method - Constructor Story 🏗️
-
-The `__init__` method is a **constructor**. It runs automatically when you create a new object:
-
-```
-┌─────────────────────────────────────┐
-│   CREATING A NEW OBJECT             │
-├─────────────────────────────────────┤
-│                                     │
-│  alice = Person("Alice", 25)        │
-│     ↓                               │
-│  __init__ is called AUTOMATICALLY   │
-│     ↓                               │
-│  self.name = "Alice"                │
-│  self.age = 25                      │
-│     ↓                               │
-│  alice object is ready to use!      │
-│                                     │
-└─────────────────────────────────────┘
-```
-
-### Constructor Example
+### Multiple Parameters
 
 ```python
-class Person:
-    """A person with name and age"""
-    
-    def __init__(self, name, age):
-        """Initialize a person"""
-        self.name = name
-        self.age = age
-        self.created_at = "2024"
-    
-    def introduce(self):
-        return f"Hi, I'm {self.name} and I'm {self.age} years old"
+def add_numbers(num1, num2):
+    """Add two numbers together"""
+    result = num1 + num2
+    print(f"{num1} + {num2} = {result}")
 
-# Creating objects
-alice = Person("Alice", 25)
-bob = Person("Bob", 30)
-
-print(alice.introduce())  # Output: Hi, I'm Alice and I'm 25 years old
-print(bob.introduce())    # Output: Hi, I'm Bob and I'm 30 years old
-
-# Each object has its own attributes
-print(alice.name)  # Output: Alice
-print(bob.name)    # Output: Bob
+add_numbers(5, 3)       # Output: 5 + 3 = 8
+add_numbers(100, 50)    # Output: 100 + 50 = 150
+add_numbers(-5, 10)     # Output: -5 + 10 = 5
 ```
 
-### Constructor with Default Values
+**Parameter Order Matters!**
 
 ```python
-class Car:
-    """A car with default values"""
-    
-    def __init__(self, brand, year=2024, color="White"):
-        """
-        Initialize a car
-        
-        Args:
-            brand (str): Car brand (required)
-            year (int): Year of manufacture (default: 2024)
-            color (str): Car color (default: White)
-        """
-        self.brand = brand
-        self.year = year
-        self.color = color
-    
-    def describe(self):
-        return f"{self.color} {self.year} {self.brand}"
+def introduce(name, age):
+    print(f"{name} is {age} years old")
 
-# Create cars with different parameters
-car1 = Car("Toyota")
-print(car1.describe())  # Output: White 2024 Toyota
-
-car2 = Car("BMW", 2023)
-print(car2.describe())  # Output: White 2023 BMW
-
-car3 = Car("Ferrari", 2024, "Red")
-print(car3.describe())  # Output: Red 2024 Ferrari
+introduce("Alice", 25)   # ✅ Correct: Alice is 25 years old
+introduce(25, "Alice")   # ❌ Wrong: 25 is Alice years old (nonsense!)
 ```
 
----
+### Default Parameters
 
-## Encapsulation
+Default parameters provide a fallback value if no argument is given:
 
-### What is Encapsulation? - The Bank Account Story 🏦
+```python
+def greet(name="Guest"):
+    """Greet with a default name"""
+    print(f"Hello, {name}!")
 
-Encapsulation means hiding internal details and controlling how data is accessed. Think of a bank account:
+greet()              # Uses default: Hello, Guest!
+greet("Alice")       # Uses provided: Hello, Alice!
+greet("Bob")         # Uses provided: Hello, Bob!
+```
+
+**Real-world Example:**
+
+```python
+def create_account(username, is_admin=False, email=None):
+    """
+    Create a user account
+    
+    is_admin defaults to False
+    email is optional (defaults to None)
+    """
+    print(f"Creating account for: {username}")
+    print(f"Admin account: {is_admin}")
+    print(f"Email: {email if email else 'Not provided'}")
+
+create_account("john")
+# Output:
+# Creating account for: john
+# Admin account: False
+# Email: Not provided
+
+create_account("alice", is_admin=True, email="alice@email.com")
+# Output:
+# Creating account for: alice
+# Admin account: True
+# Email: alice@email.com
+```
+
+### Keyword Arguments
+
+Instead of relying on position, you can specify which parameter gets which value:
+
+```python
+def book_flight(destination, date, class_type):
+    print(f"Booking {class_type} to {destination} on {date}")
+
+# Positional (order matters)
+book_flight("Paris", "2024-12-25", "Business")
+
+# Keyword (order doesn't matter!)
+book_flight(destination="Paris", date="2024-12-25", class_type="Business")
+book_flight(date="2024-12-25", destination="Paris", class_type="Business")
+book_flight(class_type="Business", destination="Paris", date="2024-12-25")
+
+# Mix positional and keyword
+book_flight("Paris", class_type="Business", date="2024-12-25")
+```
+
+### Variable Length Arguments (*args)
+
+When you don't know how many arguments will be passed:
+
+```python
+def print_all_items(*items):
+    """
+    *items collects all arguments into a tuple
+    The * means "gather all remaining arguments"
+    """
+    for item in items:
+        print(f"• {item}")
+
+print_all_items("apple")
+# Output: • apple
+
+print_all_items("apple", "banana")
+# Output: 
+# • apple
+# • banana
+
+print_all_items("apple", "banana", "cherry", "date")
+# Output:
+# • apple
+# • banana
+# • cherry
+# • date
+```
+
+**Visual Explanation:**
 
 ```
 ┌─────────────────────────────────────────┐
-│        BANK ACCOUNT                     │
+│   HOW *args WORKS                       │
 ├─────────────────────────────────────────┤
 │                                         │
-│  PRIVATE (Hidden from outside):         │
-│  • Internal ledger                      │
-│  • Transaction logs                     │
-│  • Security codes                       │
+│  def add(*numbers):                     │
+│      total = sum(numbers)               │
+│      return total                       │
 │                                         │
-│  PUBLIC (What you can do):              │
-│  • deposit(amount)                      │
-│  • withdraw(amount)                     │
-│  • check_balance()                      │
+│  add(5)                                 │
+│  └→ numbers = (5,)                      │
 │                                         │
-│  You can't directly touch the money!    │
-│  You must use the provided methods!     │
+│  add(5, 10)                             │
+│  └→ numbers = (5, 10)                   │
+│                                         │
+│  add(5, 10, 15, 20)                     │
+│  └→ numbers = (5, 10, 15, 20)           │
 │                                         │
 └─────────────────────────────────────────┘
 ```
 
-### Private and Public Attributes
+### Keyword Variable Arguments (**kwargs)
+
+When you want to pass named parameters:
 
 ```python
-class BankAccount:
-    """A bank account with encapsulation"""
-    
-    def __init__(self, owner, balance=0):
-        self.owner = owner
-        self._balance = balance  # _ means "private" (convention)
-    
-    def deposit(self, amount):
-        """Add money to account"""
-        if amount > 0:
-            self._balance += amount
-            return f"Deposited ${amount}. New balance: ${self._balance}"
-        return "Cannot deposit negative amount"
-    
-    def withdraw(self, amount):
-        """Remove money from account"""
-        if amount > 0 and amount <= self._balance:
-            self._balance -= amount
-            return f"Withdrew ${amount}. New balance: ${self._balance}"
-        return "Insufficient funds or invalid amount"
-    
-    def check_balance(self):
-        """Check account balance"""
-        return f"Balance: ${self._balance}"
+def create_user(**kwargs):
+    """
+    **kwargs collects keyword arguments into a dictionary
+    The ** means "gather all keyword arguments"
+    """
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
 
-# Use the account
-account = BankAccount("Alice", 1000)
-
-print(account.deposit(500))      # Output: Deposited $500. New balance: $1500
-print(account.withdraw(200))     # Output: Withdrew $200. New balance: $1300
-print(account.check_balance())   # Output: Balance: $1300
-
-# ❌ Don't do this (breaks encapsulation):
-# account._balance = -5000  # Bad! Hides the business logic
-```
-
-### Using Property Decorators for Encapsulation
-
-```python
-class Student:
-    """A student with protected GPA"""
-    
-    def __init__(self, name, gpa=0.0):
-        self.name = name
-        self._gpa = gpa  # Private attribute
-    
-    @property
-    def gpa(self):
-        """Get the GPA (read-only)"""
-        return round(self._gpa, 2)
-    
-    @gpa.setter
-    def gpa(self, value):
-        """Set the GPA with validation"""
-        if 0.0 <= value <= 4.0:
-            self._gpa = value
-        else:
-            raise ValueError("GPA must be between 0.0 and 4.0")
-
-# Use the student
-student = Student("Bob", 3.5)
-
-print(student.gpa)      # Output: 3.5 (getter is called)
-student.gpa = 3.8       # Setter is called with validation
-print(student.gpa)      # Output: 3.8
-
-# This will raise an error (validation)
-# student.gpa = 5.0  # ValueError!
-```
-
----
-
-## Inheritance
-
-### What is Inheritance? - The Family Tree Story 👨‍👩‍👧
-
-Inheritance allows a class to get properties and methods from another class:
-
-```
-┌──────────────────────────────────────┐
-│        ANIMAL (Parent Class)         │
-│                                      │
-│  Attributes:                         │
-│  • name, age                         │
-│                                      │
-│  Methods:                            │
-│  • eat(), sleep(), make_sound()      │
-└──────────────────────────────────────┘
-      ↑                    ↑           ↑
-    inherits            inherits     inherits
-      ↓                    ↓           ↓
-┌─────────────┐    ┌─────────────┐  ┌─────────────┐
-│   Dog       │    │   Cat       │  │   Bird      │
-│(Child Class)│    │(Child Class)│  │(Child Class)│
-│             │    │             │  │             │
-│ ADD:        │    │ ADD:        │  │ ADD:        │
-│ • fetch()   │    │ • scratch() │  │ • fly()     │
-│ • bark()    │    │ • meow()    │  │ • sing()    │
-└─────────────┘    └─────────────┘  └─────────────┘
-```
-
-### Simple Inheritance
-
-```python
-# Parent class
-class Animal:
-    """Base class for all animals"""
-    
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-    
-    def eat(self):
-        return f"{self.name} is eating"
-    
-    def sleep(self):
-        return f"{self.name} is sleeping"
-
-# Child class - inherits from Animal
-class Dog(Animal):
-    """Dog class inheriting from Animal"""
-    
-    def bark(self):
-        return f"{self.name} says: Woof! Woof!"
-
-# Create a dog
-my_dog = Dog("Buddy", 3)
-
-# Use inherited methods
-print(my_dog.eat())    # Output: Buddy is eating (inherited)
-print(my_dog.sleep())  # Output: Buddy is sleeping (inherited)
-
-# Use dog-specific method
-print(my_dog.bark())   # Output: Buddy says: Woof! Woof! (own)
-```
-
-### Overriding Methods
-
-Child classes can replace parent methods:
-
-```python
-class Animal:
-    """Base animal class"""
-    
-    def __init__(self, name):
-        self.name = name
-    
-    def make_sound(self):
-        return f"{self.name} makes a sound"
-
-class Dog(Animal):
-    """Dog with own implementation"""
-    
-    def make_sound(self):
-        """Override the parent method"""
-        return f"{self.name} barks: Woof!"
-
-class Cat(Animal):
-    """Cat with own implementation"""
-    
-    def make_sound(self):
-        """Override the parent method"""
-        return f"{self.name} meows: Meow!"
-
-# Use different animals
-dog = Dog("Buddy")
-cat = Cat("Whiskers")
-
-print(dog.make_sound())  # Output: Buddy barks: Woof!
-print(cat.make_sound())  # Output: Whiskers meows: Meow!
-```
-
-### Using super() - Call Parent Method
-
-```python
-class Vehicle:
-    """Base vehicle class"""
-    
-    def __init__(self, brand, year):
-        self.brand = brand
-        self.year = year
-    
-    def describe(self):
-        return f"{self.year} {self.brand}"
-
-class Car(Vehicle):
-    """Car class that extends Vehicle"""
-    
-    def __init__(self, brand, year, doors=4):
-        super().__init__(brand, year)  # Call parent's __init__
-        self.doors = doors
-    
-    def describe(self):
-        """Extend parent's describe method"""
-        parent_desc = super().describe()  # Get parent's description
-        return f"{parent_desc} with {self.doors} doors"
-
-# Use the car
-car = Car("Toyota", 2024, 4)
-print(car.describe())  # Output: 2024 Toyota with 4 doors
-```
-
----
-
-## Polymorphism
-
-### What is Polymorphism? - The Remote Control Story 📺
-
-Polymorphism means "many forms". The same method name works differently for different objects:
-
-```
-┌──────────────────────────────────┐
-│   REMOTE CONTROL (Same Button)   │
-├──────────────────────────────────┤
-│                                  │
-│  When pressed on TV:             │
-│  └→ TV turns on                  │
-│                                  │
-│  When pressed on Radio:          │
-│  └→ Radio turns on               │
-│                                  │
-│  When pressed on Light:          │
-│  └→ Light turns on               │
-│                                  │
-│  Same button → Different actions │
-│                                  │
-└──────────────────────────────────┘
-```
-
-### Polymorphism Example
-
-```python
-class Animal:
-    """Base class"""
-    
-    def make_sound(self):
-        pass
-
-class Dog(Animal):
-    """Dog implementation"""
-    
-    def make_sound(self):
-        return "Woof!"
-
-class Cat(Animal):
-    """Cat implementation"""
-    
-    def make_sound(self):
-        return "Meow!"
-
-class Cow(Animal):
-    """Cow implementation"""
-    
-    def make_sound(self):
-        return "Moo!"
-
-# The magic of polymorphism!
-def animal_sound(animal):
-    """Works with any animal"""
-    print(animal.make_sound())
-
-# Different animals, same function
-animals = [Dog(), Cat(), Cow()]
-
-for animal in animals:
-    animal_sound(animal)
-
+create_user(name="Alice", age=25, city="New York")
 # Output:
-# Woof!
-# Meow!
-# Moo!
-```
+# name: Alice
+# age: 25
+# city: New York
 
-### Interface-like Polymorphism
-
-```python
-class Shape:
-    """Base shape class"""
-    
-    def area(self):
-        raise NotImplementedError
-
-class Circle(Shape):
-    """Circle implementation"""
-    
-    def __init__(self, radius):
-        self.radius = radius
-    
-    def area(self):
-        import math
-        return math.pi * self.radius ** 2
-
-class Rectangle(Shape):
-    """Rectangle implementation"""
-    
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-    
-    def area(self):
-        return self.width * self.height
-
-class Triangle(Shape):
-    """Triangle implementation"""
-    
-    def __init__(self, base, height):
-        self.base = base
-        self.height = height
-    
-    def area(self):
-        return (self.base * self.height) / 2
-
-# Polymorphic function
-def calculate_areas(shapes):
-    """Works with any shape"""
-    for shape in shapes:
-        print(f"Area: {shape.area():.2f}")
-
-# Use with different shapes
-shapes = [
-    Circle(5),
-    Rectangle(4, 6),
-    Triangle(3, 8)
-]
-
-calculate_areas(shapes)
+create_user(username="john_doe", email="john@email.com", subscription="premium")
 # Output:
-# Area: 78.50
-# Area: 24.00
-# Area: 12.00
+# username: john_doe
+# email: john@email.com
+# subscription: premium
+```
+
+### Combining All Types (*args and **kwargs)
+
+```python
+def flexible_function(required_param, *args, default_param=10, **kwargs):
+    """
+    Order matters:
+    1. Required parameters
+    2. *args (variable positional)
+    3. Default parameters
+    4. **kwargs (variable keyword)
+    """
+    print(f"Required: {required_param}")
+    print(f"Args: {args}")
+    print(f"Default: {default_param}")
+    print(f"Kwargs: {kwargs}")
+
+flexible_function(1, 2, 3, 4, default_param=20, name="Alice", age=25)
+# Output:
+# Required: 1
+# Args: (2, 3, 4)
+# Default: 20
+# Kwargs: {'name': 'Alice', 'age': 25}
 ```
 
 ---
 
-## Abstraction
+## Return Values
 
-### What is Abstraction? - The Car Dashboard Story 🚗
+### Why Return Values Matter 📤
 
-Abstraction hides complex details and shows only what's necessary:
-
-```
-┌──────────────────────────────┐
-│   CAR DASHBOARD (Simple)     │
-│                              │
-│  ✓ Speed gauge              │
-│  ✓ Fuel gauge               │
-│  ✓ Temperature gauge         │
-│                              │
-│  (User doesn't see:)        │
-│  ✗ Engine mechanics         │
-│  ✗ Transmission details     │
-│  ✗ Electrical systems       │
-│                              │
-│  Simple interface for       │
-│  complex internal system!   │
-│                              │
-└──────────────────────────────┘
-```
-
-### Using Abstract Base Classes
+Without return values, functions can only print things. But in real programs, you need functions to **give back** data so other parts of your code can use it.
 
 ```python
-from abc import ABC, abstractmethod
+# ❌ Without return - information is lost
+def add_numbers(a, b):
+    result = a + b
+    print(result)  # Only prints, doesn't give back the value
 
-class PaymentProcessor(ABC):
-    """Abstract base class for payment processing"""
-    
-    @abstractmethod
-    def process_payment(self, amount):
-        """Process payment - must be implemented by child classes"""
-        pass
-    
-    @abstractmethod
-    def refund(self, amount):
-        """Process refund - must be implemented by child classes"""
-        pass
+add_numbers(5, 3)  # Prints 8, but you can't use the 8 elsewhere
 
-class CreditCardProcessor(PaymentProcessor):
-    """Concrete implementation for credit card"""
-    
-    def process_payment(self, amount):
-        return f"Processing ${amount} via credit card"
-    
-    def refund(self, amount):
-        return f"Refunding ${amount} to credit card"
+# ✅ With return - you can use the result
+def add_numbers(a, b):
+    result = a + b
+    return result  # Returns the value
 
-class PayPalProcessor(PaymentProcessor):
-    """Concrete implementation for PayPal"""
+total = add_numbers(5, 3)  # You can now use the returned value
+print(total)       # Output: 8
+print(total * 2)   # Output: 16 (you can do math with it!)
+```
+
+### Single Return Value
+
+```python
+def get_discount(price, is_member):
+    """Calculate price after discount"""
+    if is_member:
+        discounted = price * 0.8  # 20% off
+    else:
+        discounted = price
     
-    def process_payment(self, amount):
-        return f"Processing ${amount} via PayPal"
+    return discounted
+
+# Use the returned value
+member_price = get_discount(100, True)
+print(member_price)  # Output: 80.0
+
+non_member_price = get_discount(100, False)
+print(non_member_price)  # Output: 100
+```
+
+### Multiple Return Values
+
+Functions can return multiple values as a tuple:
+
+```python
+def get_user_info():
+    """Get name and age"""
+    name = "Alice"
+    age = 25
+    email = "alice@email.com"
     
-    def refund(self, amount):
-        return f"Refunding ${amount} to PayPal"
+    return name, age, email  # Returns a tuple
 
-# Use the processors
-cc = CreditCardProcessor()
-paypal = PayPalProcessor()
+# Unpack the returned values
+user_name, user_age, user_email = get_user_info()
+print(user_name)    # Output: Alice
+print(user_age)     # Output: 25
+print(user_email)   # Output: alice@email.com
+```
 
-print(cc.process_payment(100))      # Output: Processing $100 via credit card
-print(paypal.process_payment(50))   # Output: Processing $50 via PayPal
+**Visual Explanation:**
 
-# ❌ Cannot create abstract class directly:
-# processor = PaymentProcessor()  # TypeError!
+```
+┌───────────────────────────────────────────┐
+│   RETURNING MULTIPLE VALUES               │
+├───────────────────────────────────────────┤
+│                                           │
+│  def get_dimensions():                    │
+│      width = 10                           │
+│      height = 20                          │
+│      return width, height                 │
+│                ↓                          │
+│      Returns: (10, 20) ← tuple            │
+│                                           │
+│  w, h = get_dimensions()                  │
+│  └→ Unpacks tuple into w=10, h=20         │
+│                                           │
+└───────────────────────────────────────────┘
+```
+
+### Early Returns
+
+Sometimes you want to exit a function early:
+
+```python
+def validate_age(age):
+    """Check if age is valid"""
+    
+    if age < 0:
+        print("Error: Age can't be negative")
+        return False  # Exit early!
+    
+    if age > 120:
+        print("Error: Age too high")
+        return False  # Exit early!
+    
+    print("Age is valid")
+    return True
 ```
 
 ---
 
-## Special Methods (Dunder Methods)
+## Function Scope
 
-### Magic Methods - Making Objects Behave Like Built-ins ✨
+### The Story of Scope - The Room Analogy 🏠
 
-Dunder methods (double underscore) let objects work with Python's built-in functions:
+Imagine you're in a house with multiple rooms:
 
-```python
-class Book:
-    """A book class with special methods"""
-    
-    def __init__(self, title, author, pages):
-        self.title = title
-        self.author = author
-        self.pages = pages
-    
-    def __str__(self):
-        """String representation (user-friendly)"""
-        return f"'{self.title}' by {self.author}"
-    
-    def __repr__(self):
-        """Developer representation"""
-        return f"Book('{self.title}', '{self.author}', {self.pages})"
-    
-    def __len__(self):
-        """Length of book (number of pages)"""
-        return self.pages
-    
-    def __eq__(self, other):
-        """Check if two books are equal"""
-        if not isinstance(other, Book):
-            return False
-        return (self.title == other.title and 
-                self.author == other.author)
-    
-    def __lt__(self, other):
-        """Compare books by page count"""
-        return self.pages < other.pages
-    
-    def __add__(self, other):
-        """Add two books (combine total pages)"""
-        return Book(
-            f"{self.title} & {other.title}",
-            f"{self.author} & {other.author}",
-            self.pages + other.pages
-        )
-
-# Use the book
-book1 = Book("Python 101", "John Doe", 300)
-book2 = Book("Advanced Python", "Jane Smith", 450)
-
-print(str(book1))        # Output: 'Python 101' by John Doe
-print(len(book1))        # Output: 300
-print(book1 < book2)     # Output: True (300 < 450)
-print(book1 == book2)    # Output: False
-
-combined = book1 + book2
-print(combined)          # Output: 'Python 101 & Advanced Python' by John Doe & Jane Smith
+```
+┌─────────────────────────────────────────┐
+│        HOUSE (GLOBAL SCOPE)             │
+│                                         │
+│  ┌────────────────────────────────┐   │
+│  │  KITCHEN (FUNCTION)            │   │
+│  │  ┌──────────────────────────┐  │   │
+│  │  │ LOCAL SCOPE             │  │   │
+│  │  │ • Knife (exists here)   │  │   │
+│  │  │ • Plate (exists here)   │  │   │
+│  │  └──────────────────────────┘  │   │
+│  │ • Refrigerator (exists here)   │   │
+│  └────────────────────────────────┘   │
+│                                         │
+│  ┌────────────────────────────────┐   │
+│  │  BEDROOM (FUNCTION)            │   │
+│  │ ┌──────────────────────────┐   │   │
+│  │ │ LOCAL SCOPE             │   │   │
+│  │ │ • Pillow (exists here)  │   │   │
+│  │ │ • Blanket (exists here) │   │   │
+│  │ └──────────────────────────┘   │   │
+│  └────────────────────────────────┘   │
+│                                         │
+│  ✓ Light Switch (exists globally)      │
+│  ✓ Door (exists globally)              │
+│  ✓ Windows (exists globally)           │
+└─────────────────────────────────────────┘
 ```
 
-### Common Dunder Methods Reference
+**The Rules:**
+1. **Global variables** (house-level) can be accessed anywhere
+2. **Local variables** (room-level) can ONLY be accessed in that room
+3. **You can't bring kitchen items into the bedroom** unless you carry them
+
+### Local Scope Example
 
 ```python
-class Product:
-    """Product with various dunder methods"""
+def make_sandwich():
+    """Local variables exist only in this function"""
+    bread = "whole wheat"  # Local variable
+    cheese = "cheddar"     # Local variable
     
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-    
-    # String representations
-    def __str__(self):          # print(), str()
-        return f"{self.name}: ${self.price}"
-    
-    def __repr__(self):         # repr(), debugging
-        return f"Product('{self.name}', {self.price})"
-    
-    # Comparisons
-    def __eq__(self, other):    # ==
-        return self.price == other.price
-    
-    def __lt__(self, other):    # <
-        return self.price < other.price
-    
-    def __le__(self, other):    # <=
-        return self.price <= other.price
-    
-    # Arithmetic
-    def __add__(self, other):   # +
-        return self.price + other.price
-    
-    def __sub__(self, other):   # -
-        return self.price - other.price
-    
-    def __mul__(self, quantity):  # *
-        return self.price * quantity
-    
-    # Size/Length
-    def __len__(self):          # len()
-        return int(self.price)
-    
-    # Callable
-    def __call__(self):         # product()
-        return f"Calling {self.name}"
-    
-    # Container operations
-    def __contains__(self, item):  # in operator
-        return item in self.name
+    print(f"Making sandwich with {bread} and {cheese}")
 
-# Use the product
-p1 = Product("Laptop", 1000)
-p2 = Product("Mouse", 25)
+make_sandwich()  # Output: Making sandwich with whole wheat and cheddar
 
-print(str(p1))           # Output: Laptop: $1000
-print(p1 > p2)           # Output: True
-print(p1 + p2)           # Output: 1025
-print(p1 * 2)            # Output: 2000
-print(len(p1))           # Output: 1000
+# Try to use the local variables outside the function
+print(bread)  # ❌ ERROR! NameError: name 'bread' is not defined
 ```
+
+### Global Scope Example
+
+```python
+recipe = "chocolate chip cookies"  # Global variable
+
+def display_recipe():
+    """Can access global variables"""
+    print(f"Today's recipe: {recipe}")
+
+display_recipe()  # Output: Today's recipe: chocolate chip cookies
+print(recipe)     # Output: chocolate chip cookies (also accessible here)
+```
+
+### Mixing Global and Local
+
+```python
+username = "Alice"  # Global
+
+def login(password):
+    username = "Guest"  # Local (shadows global)
+    print(f"User: {username}, Password: {password}")
+
+login("secret123")
+# Output: User: Guest, Password: secret123
+
+print(username)  # Output: Alice (global is still Alice)
+```
+
+### The global Keyword
+
+If you MUST modify a global variable from inside a function:
+
+```python
+counter = 0  # Global variable
+
+def increment():
+    """Modify global variable"""
+    global counter  # Declare that we're using the global variable
+    counter += 1
+
+increment()
+print(counter)  # Output: 1
+
+increment()
+print(counter)  # Output: 2
+
+increment()
+print(counter)  # Output: 3
+```
+
+⚠️ **Warning**: Using `global` makes code confusing. Avoid it when possible!
 
 ---
 
-## Class vs Instance Variables
+## Advanced Function Types
 
-### The Difference - Shared vs Personal 🎯
+### 1. Recursive Functions (Functions that Call Themselves)
 
-Class variables are shared by all instances. Instance variables are unique to each object:
+A recursive function is a function that calls itself. It's like looking in a mirror that reflects another mirror:
 
 ```
-┌────────────────────────────────────────┐
-│         CLASS vs INSTANCE VARIABLES    │
-├────────────────────────────────────────┤
-│                                        │
-│  CLASS VARIABLE:                       │
-│  ├─ defined in class body              │
-│  ├─ shared by all instances            │
-│  ├─ exists only once in memory         │
-│  └─ accessed via class or instance     │
-│                                        │
-│  INSTANCE VARIABLE:                    │
-│  ├─ defined in __init__                │
-│  ├─ unique to each instance            │
-│  ├─ each instance has its own copy     │
-│  └─ accessed via instance only         │
-│                                        │
-└────────────────────────────────────────┘
+┌─────────────────────────────────────┐
+│   RECURSION VISUALIZATION           │
+├─────────────────────────────────────┤
+│                                     │
+│  Problem: Calculate 5!              │
+│  (5 × 4 × 3 × 2 × 1)               │
+│                                     │
+│  factorial(5)                       │
+│  └→ 5 × factorial(4)                │
+│     └→ 4 × factorial(3)             │
+│        └→ 3 × factorial(2)          │
+│           └→ 2 × factorial(1)       │
+│              └→ 1 (BASE CASE!)      │
+│                                     │
+│  Result: 120                        │
+│                                     │
+└─────────────────────────────────────┘
 ```
 
-### Example
+**Components of Recursion:**
+1. **Base Case**: When to stop (prevents infinite loop)
+2. **Recursive Case**: Call itself with smaller input
 
 ```python
-class Student:
-    """Student class with class and instance variables"""
+def factorial(n):
+    """Calculate factorial using recursion"""
     
-    school = "Python High School"  # Class variable (shared)
-    student_count = 0              # Class variable (counter)
+    # BASE CASE - Stop here
+    if n == 1:
+        return 1
     
-    def __init__(self, name, gpa):
-        self.name = name           # Instance variable
-        self.gpa = gpa             # Instance variable
+    # RECURSIVE CASE - Call itself
+    return n * factorial(n - 1)
+
+print(factorial(5))   # Output: 120
+print(factorial(6))   # Output: 720
+print(factorial(10))  # Output: 3628800
+```
+
+**Real-world Example: File Search**
+
+```python
+def search_files(directory, target_file):
+    """Search for a file in nested directories"""
+    import os
+    
+    # List all items in current directory
+    for item in os.listdir(directory):
+        path = os.path.join(directory, item)
         
-        # Modify class variable
-        Student.student_count += 1
+        if item == target_file:
+            return f"Found: {path}"
+        
+        # If it's a directory, search inside it
+        if os.path.isdir(path):
+            result = search_files(path, target_file)  # Recursive call
+            if result:
+                return result
+    
+    return None
+```
 
-# Create students
-s1 = Student("Alice", 3.8)
-s2 = Student("Bob", 3.5)
-s3 = Student("Charlie", 3.9)
+### 2. Generator Functions (Functions that Yield)
 
-# Access instance variables
-print(s1.name)           # Output: Alice
-print(s2.name)           # Output: Bob
+Instead of returning all values at once, generators produce values one at a time:
 
-# Access class variables (shared)
-print(s1.school)         # Output: Python High School
-print(s2.school)         # Output: Python High School (same)
-print(Student.student_count)  # Output: 3
+```python
+# ❌ Regular function - returns all at once
+def count_to_5():
+    numbers = []
+    for i in range(1, 6):
+        numbers.append(i)
+    return numbers
 
-# Change class variable
-Student.school = "New Python Academy"
-print(s1.school)         # Output: New Python Academy (changed for all)
-print(s2.school)         # Output: New Python Academy (changed for all)
+result = count_to_5()  # Gets [1, 2, 3, 4, 5]
+
+# ✅ Generator - produces values one at a time
+def count_to_5_generator():
+    for i in range(1, 6):
+        yield i  # Pauses here and returns the value
+
+gen = count_to_5_generator()  # Doesn't run yet
+print(next(gen))  # Output: 1 (runs until first yield)
+print(next(gen))  # Output: 2 (resumes from where it paused)
+print(next(gen))  # Output: 3
+print(next(gen))  # Output: 4
+print(next(gen))  # Output: 5
+```
+
+**Benefits:**
+- 💾 **Memory Efficient**: Produces values on-demand instead of storing all in memory
+- ⚡ **Lazy Evaluation**: Only does work when needed
+- 🎯 **Perfect for Large Datasets**: Can process huge files without loading everything
+
+```python
+# Generator for reading large files
+def read_large_file(file_path):
+    """Read file line by line without loading entire file"""
+    with open(file_path, 'r') as file:
+        for line in file:
+            yield line.strip()  # Return one line at a time
+
+# Process huge file without memory issues
+for line in read_large_file('huge_file.txt'):
+    print(line)  # Process line by line
 ```
 
 ---
 
-## Static and Class Methods
+## Decorators
 
-### Static Methods - No Access to Instance or Class 🔒
+### What are Decorators? - The Gift Wrapping Story 🎁
 
-```python
-class MathTools:
-    """Class with static methods"""
-    
-    @staticmethod
-    def add(a, b):
-        """Add two numbers"""
-        return a + b
-    
-    @staticmethod
-    def multiply(a, b):
-        """Multiply two numbers"""
-        return a * b
-    
-    @staticmethod
-    def is_even(n):
-        """Check if number is even"""
-        return n % 2 == 0
+Imagine you have a plain t-shirt (your function). You want to add flair to it:
 
-# Use without creating an instance
-print(MathTools.add(5, 3))         # Output: 8
-print(MathTools.multiply(4, 6))    # Output: 24
-print(MathTools.is_even(10))       # Output: True
-
-# Also works with instance
-tools = MathTools()
-print(tools.add(10, 20))           # Output: 30
+```
+Plain T-Shirt                 After Decorating
+   ┌─────┐                          ┌─────┐
+   │  T  │                          │ ★T★ │
+   │ Shirt│                          │Shirt│
+   └─────┘                          └─────┘
 ```
 
-### Class Methods - Access to Class Variables 🏛️
+A decorator is a function that **wraps another function** to add extra behavior without changing the original function.
+
+**The Concept:**
 
 ```python
-class Counter:
-    """Class with class methods"""
+# Original function
+def greet(name):
+    return f"Hello, {name}!"
+
+# Decorator: Adds extra behavior
+def add_exclamation(func):
+    def wrapper(name):
+        result = func(name)
+        return result + "!!!"  # Add extra exclamation marks
+    return wrapper
+
+# Apply decorator
+greet = add_exclamation(greet)
+
+# Now greet is decorated
+print(greet("Alice"))  # Output: Hello, Alice!!!!
+```
+
+### Decorator Syntax (@ symbol)
+
+Python provides a cleaner syntax using `@`:
+
+```python
+def uppercase_decorator(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.upper()
+    return wrapper
+
+# Using @ syntax
+@uppercase_decorator
+def greet(name):
+    return f"hello, {name}!"
+
+print(greet("Alice"))  # Output: HELLO, ALICE!
+```
+
+**It's equivalent to:**
+```python
+def greet(name):
+    return f"hello, {name}!"
+
+greet = uppercase_decorator(greet)
+```
+
+### Decorator with Arguments
+
+```python
+def repeat_decorator(times):
+    """Decorator that repeats function output"""
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            return result * times
+        return wrapper
+    return decorator
+
+@repeat_decorator(3)
+def greet(name):
+    return f"Hi, {name}! "
+
+print(greet("Bob"))  # Output: Hi, Bob! Hi, Bob! Hi, Bob! 
+```
+
+### Practical Decorator Example: Timing a Function
+
+```python
+import time
+
+def timer_decorator(func):
+    """Decorator that measures function execution time"""
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        
+        execution_time = end_time - start_time
+        print(f"⏱️  Function '{func.__name__}' took {execution_time:.4f} seconds")
+        
+        return result
+    return wrapper
+
+@timer_decorator
+def slow_function():
+    time.sleep(2)
+    return "Done!"
+
+slow_function()
+# Output:
+# ⏱️  Function 'slow_function' took 2.0042 seconds
+# Done!
+```
+
+---
+
+## Lambda Functions
+
+### What are Lambda Functions? - The Quick Anonymous Function Story 🚀
+
+Lambda functions are small, anonymous functions you write in one line. They're like "quick notes" instead of "full diary entries".
+
+```python
+# Regular function (diary entry)
+def add(a, b):
+    return a + b
+
+# Lambda function (quick note)
+add_quick = lambda a, b: a + b
+
+print(add(5, 3))        # Output: 8
+print(add_quick(5, 3))  # Output: 8
+```
+
+**Syntax:**
+```
+lambda arguments: expression
+```
+
+### Lambda Examples
+
+```python
+# Single argument
+square = lambda x: x ** 2
+print(square(5))  # Output: 25
+
+# Multiple arguments
+multiply = lambda a, b: a * b
+print(multiply(3, 4))  # Output: 12
+
+# No arguments
+say_hello = lambda: "Hello!"
+print(say_hello())  # Output: Hello!
+
+# With conditions
+is_even = lambda x: "Even" if x % 2 == 0 else "Odd"
+print(is_even(10))  # Output: Even
+print(is_even(7))   # Output: Odd
+```
+
+### When to Use Lambda
+
+Lambda functions shine with `map()`, `filter()`, and `sorted()`:
+
+```python
+# Without lambda - verbose
+numbers = [1, 2, 3, 4, 5]
+squared = []
+for num in numbers:
+    squared.append(num ** 2)
+
+# With lambda - concise
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x ** 2, numbers))
+print(squared)  # Output: [1, 4, 9, 16, 25]
+```
+
+---
+
+## Map, Filter & Reduce
+
+### Map - Transform Every Item 🗺️
+
+`map()` applies a function to every item in a sequence:
+
+```
+Original:  [1, 2, 3, 4, 5]
+           ↓ (apply function)
+Result:    [1, 4, 9, 16, 25]
+           (squared values)
+```
+
+```python
+# Square every number
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x ** 2, numbers))
+print(squared)  # Output: [1, 4, 9, 16, 25]
+
+# Convert to uppercase
+words = ["apple", "banana", "cherry"]
+uppercase = list(map(lambda word: word.upper(), words))
+print(uppercase)  # Output: ['APPLE', 'BANANA', 'CHERRY']
+
+# Convert strings to integers
+strings = ["1", "2", "3", "4"]
+numbers = list(map(int, strings))
+print(numbers)  # Output: [1, 2, 3, 4]
+```
+
+### Filter - Keep Only What You Need 🔍
+
+`filter()` keeps only items that meet a condition:
+
+```
+Original:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+           ↓ (keep only even)
+Result:    [2, 4, 6, 8, 10]
+```
+
+```python
+# Keep only even numbers
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)  # Output: [2, 4, 6, 8, 10]
+
+# Keep only adults (age >= 18)
+ages = [12, 18, 25, 16, 30, 14]
+adults = list(filter(lambda age: age >= 18, ages))
+print(adults)  # Output: [18, 25, 30]
+
+# Keep only non-empty strings
+texts = ["hello", "", "world", "", "python"]
+non_empty = list(filter(lambda text: text != "", texts))
+print(non_empty)  # Output: ['hello', 'world', 'python']
+```
+
+### Reduce - Combine Into One 🔗
+
+`reduce()` combines all items into a single result:
+
+```
+Original:  [1, 2, 3, 4, 5]
+           ↓ (add all together)
+Result:    15
+```
+
+```python
+from functools import reduce
+
+# Sum all numbers
+numbers = [1, 2, 3, 4, 5]
+total = reduce(lambda a, b: a + b, numbers)
+print(total)  # Output: 15
+
+# Multiply all numbers
+product = reduce(lambda a, b: a * b, numbers)
+print(product)  # Output: 120
+
+# Find maximum
+max_num = reduce(lambda a, b: a if a > b else b, numbers)
+print(max_num)  # Output: 5
+
+# Combine strings
+words = ["Hello", "World", "Python"]
+sentence = reduce(lambda a, b: a + " " + b, words)
+print(sentence)  # Output: Hello World Python
+```
+
+**Visual Comparison:**
+
+```
+┌────────────────────────────────────┐
+│  MAP, FILTER, REDUCE COMPARISON    │
+├────────────────────────────────────┤
+│                                    │
+│  MAP    [1,2,3] → [1,4,9]         │
+│         Transform each item        │
+│         Same number of results     │
+│                                    │
+│  FILTER [1,2,3,4,5] → [2,4]       │
+│         Keep what matches          │
+│         Fewer results              │
+│                                    │
+│  REDUCE [1,2,3,4,5] → 15          │
+│         Combine into one           │
+│         Single result              │
+│                                    │
+└────────────────────────────────────┘
+```
+
+---
+
+## Closures
+
+### What are Closures? - The Secret Box Story 📦
+
+A closure is a function that "remembers" variables from the scope where it was created, even after that scope is gone.
+
+```python
+def make_multiplier(factor):
+    """Create a multiplication function"""
     
-    count = 0
+    # This inner function "remembers" the factor
+    def multiply(number):
+        return number * factor
     
-    def __init__(self, name):
-        self.name = name
-        Counter.count += 1
+    return multiply  # Return the function
+
+# Create multipliers
+times_three = make_multiplier(3)
+times_five = make_multiplier(5)
+
+# Each multiplier remembers its factor
+print(times_three(10))  # Output: 30 (10 × 3)
+print(times_five(10))   # Output: 50 (10 × 5)
+
+# Even though make_multiplier finished, 
+# times_three and times_five still "remember" their factors!
+```
+
+**Visualization:**
+
+```
+┌─────────────────────────────────────────┐
+│   HOW CLOSURES REMEMBER                 │
+├─────────────────────────────────────────┤
+│                                         │
+│  times_three = make_multiplier(3)       │
+│  ┌─────────────────────────────────┐   │
+│  │ Closure Box                     │   │
+│  │ ├─ function: multiply()         │   │
+│  │ └─ remembers: factor = 3        │   │
+│  └─────────────────────────────────┘   │
+│                                         │
+│  times_five = make_multiplier(5)        │
+│  ┌─────────────────────────────────┐   │
+│  │ Closure Box                     │   │
+│  │ ├─ function: multiply()         │   │
+│  │ └─ remembers: factor = 5        │   │
+│  └─────────────────────────────────┘   │
+│                                         │
+│  Each closure has its own memory!      │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Practical Closure Example: Counter
+
+```python
+def make_counter(start=0):
+    """Create a counter that remembers its value"""
+    count = start
     
-    @classmethod
-    def get_total_count(cls):
-        """Get total number of counters created"""
-        return f"Total counters: {cls.count}"
+    def increment():
+        nonlocal count  # Modify the outer variable
+        count += 1
+        return count
     
-    @classmethod
-    def reset_count(cls):
-        """Reset the counter"""
-        cls.count = 0
-        return "Count reset!"
-    
-    @classmethod
-    def from_string(cls, data):
-        """Create object from string"""
-        name = data.split("-")[0]
-        return cls(name)
+    return increment
 
 # Create counters
-c1 = Counter("Alice")
-c2 = Counter("Bob")
-c3 = Counter("Charlie")
+counter1 = make_counter(0)
+counter2 = make_counter(100)
 
-print(Counter.get_total_count())  # Output: Total counters: 3
+print(counter1())  # Output: 1
+print(counter1())  # Output: 2
+print(counter1())  # Output: 3
 
-# Create from string
-c4 = Counter.from_string("David-123")
-print(Counter.get_total_count())  # Output: Total counters: 4
+print(counter2())  # Output: 101
+print(counter2())  # Output: 102
 
-print(Counter.reset_count())      # Output: Count reset!
-print(Counter.get_total_count())  # Output: Total counters: 0
+# Each counter remembers its own count!
 ```
 
----
-
-## Properties and Decorators
-
-### Using @property - Make Methods Look Like Attributes 🎁
+### Closure as Configuration
 
 ```python
-class Circle:
-    """Circle with property decorators"""
+def create_logger(name, level):
+    """Create a logger that remembers its name and level"""
     
-    def __init__(self, radius):
-        self._radius = radius
+    def log(message):
+        print(f"[{level}] {name}: {message}")
     
-    @property
-    def radius(self):
-        """Get radius"""
-        return self._radius
-    
-    @radius.setter
-    def radius(self, value):
-        """Set radius with validation"""
-        if value <= 0:
-            raise ValueError("Radius must be positive")
-        self._radius = value
-    
-    @property
-    def diameter(self):
-        """Get diameter (calculated)"""
-        return self._radius * 2
-    
-    @property
-    def area(self):
-        """Get area (calculated)"""
-        import math
-        return math.pi * self._radius ** 2
+    return log
 
-# Use like attributes
-circle = Circle(5)
+# Create loggers for different parts
+system_log = create_logger("SYSTEM", "INFO")
+error_log = create_logger("ERROR", "ERROR")
+debug_log = create_logger("DEBUG", "DEBUG")
 
-print(circle.radius)      # Output: 5 (getter)
-print(circle.diameter)    # Output: 10 (getter, calculated)
-print(circle.area)        # Output: 78.53981633974483
-
-circle.radius = 7         # Output: Uses setter
-print(circle.diameter)    # Output: 14
-
-# This will raise error
-# circle.radius = -5      # ValueError!
-```
-
----
-
-## Composition
-
-### Composition vs Inheritance - What to Choose? 🔄
-
-Composition is "has-a" relationship. Inheritance is "is-a" relationship:
-
-```
-┌────────────────────────────────────────┐
-│   INHERITANCE vs COMPOSITION           │
-├────────────────────────────────────────┤
-│                                        │
-│  INHERITANCE (is-a):                   │
-│  Dog IS-A Animal                       │
-│  └─ Dog inherits from Animal           │
-│                                        │
-│  COMPOSITION (has-a):                  │
-│  Car HAS-A Engine                      │
-│  └─ Car contains an Engine             │
-│                                        │
-│  Rule: Prefer composition over         │
-│        inheritance!                    │
-│                                        │
-└────────────────────────────────────────┘
-```
-
-### Composition Example
-
-```python
-class Engine:
-    """Engine class"""
-    
-    def __init__(self, horsepower):
-        self.horsepower = horsepower
-    
-    def start(self):
-        return f"Engine started with {self.horsepower} HP"
-
-class Wheels:
-    """Wheels class"""
-    
-    def __init__(self, size):
-        self.size = size
-    
-    def roll(self):
-        return f"Wheels ({self.size}in) are rolling"
-
-class Car:
-    """Car composed of Engine and Wheels"""
-    
-    def __init__(self, brand, hp, wheel_size):
-        self.brand = brand
-        self.engine = Engine(hp)        # Has-a Engine
-        self.wheels = Wheels(wheel_size)  # Has-a Wheels
-    
-    def drive(self):
-        """Drive the car using composed objects"""
-        msg1 = self.engine.start()
-        msg2 = self.wheels.roll()
-        return f"{self.brand}: {msg1}, {msg2}"
-
-# Use composition
-car = Car("Toyota", 200, 18)
-print(car.drive())
-# Output: Toyota: Engine started with 200 HP, Wheels (18in) are rolling
-
-# Access composed objects
-print(car.engine.horsepower)  # Output: 200
-print(car.wheels.size)        # Output: 18
-```
-
----
-
-## Advanced OOP Concepts
-
-### Multiple Inheritance
-
-```python
-class Swimmer:
-    """Can swim"""
-    
-    def swim(self):
-        return "Swimming"
-
-class Flyer:
-    """Can fly"""
-    
-    def fly(self):
-        return "Flying"
-
-class Duck(Swimmer, Flyer):
-    """Duck inherits from both"""
-    
-    def quack(self):
-        return "Quack!"
-
-# Duck can do everything
-duck = Duck()
-print(duck.swim())   # Output: Swimming
-print(duck.fly())    # Output: Flying
-print(duck.quack())  # Output: Quack!
-```
-
-### Method Resolution Order (MRO)
-
-```python
-class A:
-    def method(self):
-        return "From A"
-
-class B(A):
-    def method(self):
-        return "From B"
-
-class C(A):
-    def method(self):
-        return "From C"
-
-class D(B, C):
-    pass
-
-# Check MRO
-print(D.mro())  # Output: [D, B, C, A, object]
-
-d = D()
-print(d.method())  # Output: From B (follows MRO)
-```
-
----
-
-## Design Patterns
-
-### Singleton Pattern - Only One Instance 🎯
-
-```python
-class Database:
-    """Singleton database connection"""
-    
-    _instance = None
-    
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._instance.connected = False
-        return cls._instance
-    
-    def connect(self):
-        self.connected = True
-        return "Connected to database"
-    
-    def get_status(self):
-        return "Connected" if self.connected else "Disconnected"
-
-# Create instances
-db1 = Database()
-db2 = Database()
-
-print(db1 is db2)       # Output: True (same object)
-
-print(db1.connect())    # Output: Connected to database
-print(db2.get_status()) # Output: Connected (same instance)
-```
-
-### Factory Pattern - Create Objects Dynamically 🏭
-
-```python
-class AnimalFactory:
-    """Factory to create animals"""
-    
-    @staticmethod
-    def create_animal(animal_type):
-        """Create an animal based on type"""
-        if animal_type.lower() == "dog":
-            return Dog()
-        elif animal_type.lower() == "cat":
-            return Cat()
-        else:
-            return None
-
-class Dog:
-    def speak(self):
-        return "Woof!"
-
-class Cat:
-    def speak(self):
-        return "Meow!"
-
-# Use factory
-dog = AnimalFactory.create_animal("dog")
-cat = AnimalFactory.create_animal("cat")
-
-print(dog.speak())  # Output: Woof!
-print(cat.speak())  # Output: Meow!
+system_log("Application started")
+error_log("File not found")
+debug_log("Variable x = 5")
 ```
 
 ---
 
 ## Practical Applications
 
-### Application 1: Library Management System 📚
+### Application 1: Password Validator 🔐
 
 ```python
-from datetime import datetime, timedelta
-
-class Book:
-    """Represents a book"""
+def validate_password(password):
+    """
+    Validate password with multiple criteria
+    """
+    issues = []
     
-    def __init__(self, title, author, isbn, available=True):
-        self.title = title
-        self.author = author
-        self.isbn = isbn
-        self.available = available
+    # Length check
+    if len(password) < 8:
+        issues.append("❌ Must be at least 8 characters")
+    else:
+        issues.append("✅ Length is good")
     
-    def __str__(self):
-        return f"{self.title} by {self.author}"
-
-class Member:
-    """Represents a library member"""
+    # Uppercase check
+    if not any(c.isupper() for c in password):
+        issues.append("❌ Must contain uppercase letter")
+    else:
+        issues.append("✅ Contains uppercase")
     
-    def __init__(self, name, member_id):
-        self.name = name
-        self.member_id = member_id
-        self.borrowed_books = []
+    # Lowercase check
+    if not any(c.islower() for c in password):
+        issues.append("❌ Must contain lowercase letter")
+    else:
+        issues.append("✅ Contains lowercase")
     
-    def borrow_book(self, book):
-        """Borrow a book"""
-        if book.available:
-            book.available = False
-            self.borrowed_books.append(book)
-            return f"{self.name} borrowed {book.title}"
-        return f"{book.title} is not available"
+    # Digit check
+    if not any(c.isdigit() for c in password):
+        issues.append("❌ Must contain digit")
+    else:
+        issues.append("✅ Contains digit")
     
-    def return_book(self, book):
-        """Return a book"""
-        if book in self.borrowed_books:
-            book.available = True
-            self.borrowed_books.remove(book)
-            return f"{self.name} returned {book.title}"
-        return f"{self.name} didn't borrow {book.title}"
-
-class Library:
-    """Represents a library"""
+    # Special character check
+    if not any(c in "!@#$%^&*" for c in password):
+        issues.append("❌ Must contain special character")
+    else:
+        issues.append("✅ Contains special character")
     
-    def __init__(self, name):
-        self.name = name
-        self.books = []
-        self.members = []
-    
-    def add_book(self, book):
-        """Add a book to library"""
-        self.books.append(book)
-    
-    def add_member(self, member):
-        """Add a member to library"""
-        self.members.append(member)
-    
-    def show_available_books(self):
-        """Show all available books"""
-        available = [b for b in self.books if b.available]
-        return f"Available books: {[str(b) for b in available]}"
+    return issues
 
-# Use the library
-library = Library("City Library")
-
-book1 = Book("Python 101", "John Doe", "ISBN001")
-book2 = Book("Advanced Python", "Jane Smith", "ISBN002")
-
-library.add_book(book1)
-library.add_book(book2)
-
-member = Member("Alice", "M001")
-library.add_member(member)
-
-print(member.borrow_book(book1))    # Output: Alice borrowed Python 101
-print(library.show_available_books())  # Output: Available books: ['Advanced Python by Jane Smith']
-
-print(member.return_book(book1))    # Output: Alice returned Python 101
-print(library.show_available_books())  # Output: Available books: ['Python 101 by John Doe', 'Advanced Python by Jane Smith']
+# Test
+password = "MyPass123!"
+report = validate_password(password)
+for line in report:
+    print(line)
 ```
 
-### Application 2: Game Characters System 🎮
+### Application 2: Data Processing Pipeline 🔄
 
 ```python
-class Character:
-    """Base character class"""
-    
-    def __init__(self, name, health, damage):
-        self.name = name
-        self.health = health
-        self.damage = damage
-        self.is_alive = True
-    
-    def take_damage(self, amount):
-        """Take damage"""
-        self.health -= amount
-        if self.health <= 0:
-            self.is_alive = False
-            return f"{self.name} is defeated!"
-        return f"{self.name} took {amount} damage (Health: {self.health})"
-    
-    def attack(self, target):
-        """Attack another character"""
-        if not self.is_alive:
-            return f"{self.name} is dead and can't attack!"
-        return target.take_damage(self.damage)
+def clean_data(value):
+    """Remove whitespace and convert to lowercase"""
+    return str(value).strip().lower()
 
-class Warrior(Character):
-    """Warrior character"""
-    
-    def __init__(self, name, health, damage, armor=10):
-        super().__init__(name, health, damage)
-        self.armor = armor
-    
-    def take_damage(self, amount):
-        """Armor reduces damage"""
-        reduced_damage = max(1, amount - self.armor)
-        return super().take_damage(reduced_damage)
-    
-    def shield_bash(self, target):
-        """Special attack"""
-        return target.take_damage(self.damage * 2)
+def filter_valid(value):
+    """Keep only non-empty values"""
+    return len(value) > 0
 
-class Mage(Character):
-    """Mage character"""
+def process_users(raw_data):
+    """
+    Process user data through multiple steps
     
-    def __init__(self, name, health, damage, mana=100):
-        super().__init__(name, health, damage)
-        self.mana = mana
+    Raw data → Clean → Filter → Deduplicate → Return
+    """
+    # Step 1: Clean
+    cleaned = map(clean_data, raw_data)
     
-    def fireball(self, target):
-        """Special spell attack"""
-        if self.mana >= 20:
-            self.mana -= 20
-            return target.take_damage(self.damage * 3)
-        return "Not enough mana!"
+    # Step 2: Filter
+    filtered = filter(filter_valid, cleaned)
+    
+    # Step 3: Deduplicate (remove duplicates)
+    unique = set(filtered)
+    
+    return list(unique)
 
-# Create characters
-warrior = Warrior("Conan", 100, 15, armor=10)
-mage = Mage("Gandalf", 60, 10, mana=100)
-
-# Battle
-print(warrior.attack(mage))        # Warrior attacks
-print(mage.fireball(warrior))      # Mage uses spell
-print(warrior.shield_bash(mage))   # Warrior special attack
-print(f"{mage.name} alive: {mage.is_alive}")  # Check status
+# Test
+user_names = ["  John  ", "ALICE", "", "bob", "  Alice  ", ""]
+result = process_users(user_names)
+print(result)  # Output: ['john', 'alice', 'bob']
 ```
 
-### Application 3: Bank System 💳
+### Application 3: E-commerce Order Processor 🛒
 
 ```python
-class BankAccount:
-    """Base bank account"""
-    
-    def __init__(self, account_holder, balance=0):
-        self.account_holder = account_holder
-        self._balance = balance
-        self.transactions = []
-    
-    def deposit(self, amount):
-        if amount > 0:
-            self._balance += amount
-            self.transactions.append(("Deposit", amount, self._balance))
-            return f"Deposited ${amount}"
-        return "Invalid amount"
-    
-    def withdraw(self, amount):
-        if amount > 0 and amount <= self._balance:
-            self._balance -= amount
-            self.transactions.append(("Withdraw", amount, self._balance))
-            return f"Withdrew ${amount}"
-        return "Insufficient funds or invalid amount"
-    
-    def get_balance(self):
-        return f"Balance: ${self._balance}"
+def calculate_price(quantity, unit_price):
+    """Calculate base price"""
+    return quantity * unit_price
 
-class SavingsAccount(BankAccount):
-    """Savings account with interest"""
-    
-    def __init__(self, account_holder, balance=0, interest_rate=0.05):
-        super().__init__(account_holder, balance)
-        self.interest_rate = interest_rate
-    
-    def apply_interest(self):
-        interest = self._balance * self.interest_rate
-        self._balance += interest
-        return f"Interest applied: ${interest:.2f}"
+def apply_discount(price, discount_percent=0):
+    """Apply percentage discount"""
+    return price * (1 - discount_percent / 100)
 
-class CheckingAccount(BankAccount):
-    """Checking account with overdraft protection"""
+def apply_tax(price, tax_rate=0.08):
+    """Apply sales tax"""
+    return price * (1 + tax_rate)
+
+def process_order(quantity, unit_price, discount=0, tax=0.08):
+    """Process complete order"""
+    price = calculate_price(quantity, unit_price)
+    price = apply_discount(price, discount)
+    final_price = apply_tax(price, tax)
     
-    def __init__(self, account_holder, balance=0, overdraft_limit=500):
-        super().__init__(account_holder, balance)
-        self.overdraft_limit = overdraft_limit
+    return {
+        "quantity": quantity,
+        "unit_price": unit_price,
+        "base_price": calculate_price(quantity, unit_price),
+        "after_discount": apply_discount(price, 0),  # For display
+        "final_price": final_price,
+        "savings": calculate_price(quantity, unit_price) - apply_discount(price, 0)
+    }
+
+# Test
+order = process_order(quantity=3, unit_price=50, discount=10, tax=0.08)
+for key, value in order.items():
+    if isinstance(value, float):
+        print(f"{key}: ${value:.2f}")
+    else:
+        print(f"{key}: {value}")
+```
+
+### Application 4: Text Analysis 📊
+
+```python
+def count_words(text):
+    """Count total words"""
+    return len(text.split())
+
+def count_unique_words(text):
+    """Count unique words"""
+    return len(set(text.lower().split()))
+
+def avg_word_length(text):
+    """Calculate average word length"""
+    words = text.split()
+    if not words:
+        return 0
+    total_chars = sum(len(word) for word in words)
+    return total_chars / len(words)
+
+def find_longest_word(text):
+    """Find longest word"""
+    words = text.split()
+    return max(words, key=len) if words else ""
+
+def analyze_text(text):
+    """Analyze text comprehensively"""
+    return {
+        "📝 Total words": count_words(text),
+        "🎯 Unique words": count_unique_words(text),
+        "📐 Average word length": round(avg_word_length(text), 2),
+        "🏆 Longest word": find_longest_word(text),
+        "📊 Longest word length": len(find_longest_word(text))
+    }
+
+# Test
+text = "Python is awesome. Python is fun. Programming is challenging."
+analysis = analyze_text(text)
+for key, value in analysis.items():
+    print(f"{key}: {value}")
+```
+
+### Application 5: Fibonacci Sequence (Comparing Approaches) ⚡
+
+```python
+# Approach 1: Loop (Beginner - Fast)
+def fibonacci_loop(n):
+    """Generate fibonacci using loop"""
+    if n <= 0:
+        return []
     
-    def withdraw(self, amount):
-        if amount > 0 and amount <= (self._balance + self.overdraft_limit):
-            self._balance -= amount
-            return f"Withdrew ${amount}"
-        return "Exceeds overdraft limit"
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[-1] + fib[-2])
+    return fib[:n]
 
-# Use accounts
-savings = SavingsAccount("Alice", 1000)
-checking = CheckingAccount("Bob", 500)
+# Approach 2: Recursion (Elegant but Slow)
+def fibonacci_recursive(n):
+    """Generate fibonacci recursively"""
+    if n <= 0:
+        return []
+    if n == 1:
+        return [0]
+    if n == 2:
+        return [0, 1]
+    
+    prev = fibonacci_recursive(n - 1)
+    return prev + [prev[-1] + prev[-2]]
 
-print(savings.deposit(500))        # Output: Deposited $500
-print(savings.apply_interest())    # Output: Interest applied: $75.00
+# Approach 3: Generator (Memory Efficient)
+def fibonacci_generator(n):
+    """Generate fibonacci using generator"""
+    a, b = 0, 1
+    count = 0
+    while count < n:
+        yield a
+        a, b = b, a + b
+        count += 1
 
-print(checking.withdraw(600))      # Output: Withdrew $600 (overdraft)
-print(checking.get_balance())      # Output: Balance: $-100
+# Test all approaches
+print("Loop:", fibonacci_loop(8))              # Output: [0, 1, 1, 2, 3, 5, 8, 13]
+print("Recursive:", fibonacci_recursive(8))   # Output: [0, 1, 1, 2, 3, 5, 8, 13]
+print("Generator:", list(fibonacci_generator(8)))  # Output: [0, 1, 1, 2, 3, 5, 8, 13]
 ```
 
 ---
 
-## Best Practices
+## Best Practices & Optimization
 
-### 1. Follow SOLID Principles 🏗️
-
-```python
-# S - Single Responsibility Principle
-class User:
-    """Handles user data only"""
-    def __init__(self, name, email):
-        self.name = name
-        self.email = email
-
-class EmailService:
-    """Handles email sending only"""
-    def send_email(self, user, message):
-        return f"Email sent to {user.email}: {message}"
-
-# O - Open/Closed Principle
-class Shape:
-    """Open for extension, closed for modification"""
-    def area(self):
-        raise NotImplementedError
-
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-    def area(self):
-        return 3.14 * self.radius ** 2
-```
-
-### 2. Use Type Hints 📝
+### 1. Documentation with Docstrings 📚
 
 ```python
-class Calculator:
-    """Calculator with type hints"""
-    
-    def add(self, a: int, b: int) -> int:
-        """Add two integers"""
-        return a + b
-    
-    def divide(self, a: float, b: float) -> float:
-        """Divide two floats"""
-        if b == 0:
-            raise ValueError("Cannot divide by zero")
-        return a / b
-
-# Helps catch errors early
-calc = Calculator()
-print(calc.add(5, 3))        # Output: 8
-# print(calc.add("5", 3))    # Type checking warns about this
-```
-
-### 3. Documentation with Docstrings 📚
-
-```python
-class Person:
+def calculate_circle_area(radius):
     """
-    Represents a person with name and age.
+    Calculate the area of a circle.
     
-    Attributes:
-        name (str): The person's name
-        age (int): The person's age
+    Args:
+        radius (float): The radius of the circle in units
     
-    Methods:
-        get_info(): Returns person information
-        have_birthday(): Increases age by one
-    """
+    Returns:
+        float: The area of the circle in square units
     
-    def __init__(self, name: str, age: int):
-        """Initialize a person."""
-        self.name = name
-        self.age = age
+    Raises:
+        ValueError: If radius is negative
     
-    def get_info(self) -> str:
-        """
-        Get person information.
+    Examples:
+        >>> calculate_circle_area(5)
+        78.53981633974483
         
-        Returns:
-            str: A formatted string with person info
-        """
-        return f"{self.name} is {self.age} years old"
+        >>> calculate_circle_area(0)
+        0
+    
+    Formula: A = πr²
+    """
+    if radius < 0:
+        raise ValueError("Radius cannot be negative")
+    
+    import math
+    return math.pi * radius ** 2
+
+# Access documentation
+print(calculate_circle_area.__doc__)
+help(calculate_circle_area)
 ```
 
-### 4. Keep Classes Focused ✨
+### 2. Type Hints (Python 3.5+) 🎯
 
 ```python
-# ❌ Bad - Too many responsibilities
-class User:
-    def create_account(self):
-        pass
-    
-    def send_email(self):
-        pass
-    
-    def save_to_database(self):
-        pass
-    
-    def process_payment(self):
-        pass
+def add(a: int, b: int) -> int:
+    """Add two integers"""
+    return a + b
 
-# ✅ Good - Single responsibility
-class User:
-    """Represents user data"""
-    def __init__(self, name, email):
-        self.name = name
-        self.email = email
+def greet(name: str) -> str:
+    """Greet someone"""
+    return f"Hello, {name}!"
 
-class EmailService:
-    """Handles email operations"""
-    def send_email(self, email, message):
-        pass
+def process_data(data: list) -> dict:
+    """Process data list into dictionary"""
+    return {"items": len(data), "data": data}
 
-class DatabaseService:
-    """Handles database operations"""
-    def save_user(self, user):
-        pass
-
-class PaymentService:
-    """Handles payment operations"""
-    def process_payment(self, user, amount):
-        pass
+# Type hints help with:
+# ✓ Code clarity
+# ✓ IDE autocompletion
+# ✓ Static type checking (with mypy)
+# ✓ Catching bugs early
 ```
 
-### 5. Avoid Mutable Default Arguments ⚠️
+### 3. Default Arguments Pitfall ⚠️
 
 ```python
-# ❌ Bad
-class Container:
-    def __init__(self, items=[]):
-        self.items = items  # Shared across instances!
+# ❌ DANGEROUS - Mutable default arguments
+def add_to_list(item, items=[]):
+    items.append(item)
+    return items
 
-# ✅ Good
-class Container:
-    def __init__(self, items=None):
-        self.items = items if items is not None else []
+print(add_to_list(1))      # Output: [1]
+print(add_to_list(2))      # Output: [1, 2] ← Why 2 items?!
+print(add_to_list(3))      # Output: [1, 2, 3] ← Bug!
+
+# ✅ CORRECT - Use None for mutable defaults
+def add_to_list(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+
+print(add_to_list(1))      # Output: [1]
+print(add_to_list(2))      # Output: [2]
+print(add_to_list(3))      # Output: [3]
+```
+
+### 4. Function Length - Keep It Short 📏
+
+```python
+# ❌ Too long - does too many things
+def process_user(user_data):
+    # Validate email
+    if '@' not in user_data['email']:
+        return "Invalid email"
+    
+    # Hash password
+    import hashlib
+    hashed = hashlib.sha256(user_data['password'].encode()).hexdigest()
+    
+    # Save to database
+    # ... database code ...
+    
+    # Send welcome email
+    # ... email code ...
+    
+    # Log activity
+    # ... logging code ...
+    
+    return "User created"
+
+# ✅ Better - Each function does one thing
+def validate_email(email):
+    return '@' in email
+
+def hash_password(password):
+    import hashlib
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def save_user(user_data):
+    # Database code
+    pass
+
+def send_welcome_email(email):
+    # Email code
+    pass
+
+def create_user(user_data):
+    if not validate_email(user_data['email']):
+        return "Invalid email"
+    
+    user_data['password'] = hash_password(user_data['password'])
+    save_user(user_data)
+    send_welcome_email(user_data['email'])
+    return "User created"
+```
+
+### 5. Error Handling in Functions 🛡️
+
+```python
+def divide(numerator, denominator):
+    """
+    Divide two numbers safely
+    """
+    try:
+        result = numerator / denominator
+        return result
+    except ZeroDivisionError:
+        print("❌ Error: Cannot divide by zero")
+        return None
+    except TypeError:
+        print("❌ Error: Both inputs must be numbers")
+        return None
+
+print(divide(10, 2))    # Output: 5.0
+print(divide(10, 0))    # Output: ❌ Error: Cannot divide by zero
+print(divide(10, "2"))  # Output: ❌ Error: Both inputs must be numbers
+```
+
+### 6. Memoization - Cache Results ⚡
+
+```python
+def fibonacci_slow(n):
+    """Regular recursion - SLOW"""
+    if n <= 1:
+        return n
+    return fibonacci_slow(n-1) + fibonacci_slow(n-2)
+
+# ❌ Very slow for large numbers
+# print(fibonacci_slow(40))  # Takes many seconds!
+
+# ✅ Memoization - Cache results
+cache = {}
+
+def fibonacci_fast(n):
+    """Recursion with caching - FAST"""
+    if n in cache:
+        return cache[n]
+    
+    if n <= 1:
+        result = n
+    else:
+        result = fibonacci_fast(n-1) + fibonacci_fast(n-2)
+    
+    cache[n] = result
+    return result
+
+print(fibonacci_fast(40))  # Output: 102334155 (instant!)
+
+# Python built-in decorator for this
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fibonacci_builtin(n):
+    """Using Python's built-in caching"""
+    if n <= 1:
+        return n
+    return fibonacci_builtin(n-1) + fibonacci_builtin(n-2)
+
+print(fibonacci_builtin(40))  # Output: 102334155 (instant!)
+```
+
+### 7. Naming Conventions ✅
+
+```python
+# ✅ GOOD naming
+def calculate_total_price(items):
+    pass
+
+def is_valid_email(email):
+    pass
+
+def get_user_by_id(user_id):
+    pass
+
+def validate_input(user_input):
+    pass
+
+# ❌ BAD naming
+def ct(items):  # Too abbreviated
+    pass
+
+def check(email):  # Too vague
+    pass
+
+def get(user_id):  # Too generic
+    pass
+
+def DO_SOMETHING(user_input):  # Wrong case
+    pass
 ```
 
 ---
 
-## Quick Reference Cheat Sheet 🎓
+## Function Cheat Sheet 🎓
 
 ```
-┌────────────────────────────────────────────────┐
-│      OBJECT-ORIENTED PROGRAMMING SUMMARY       │
-├────────────────────────────────────────────────┤
-│                                                │
-│  CLASS DEFINITION:                             │
-│  class ClassName:                              │
-│      def __init__(self, param):                │
-│          self.attribute = param                │
-│                                                │
-│  CREATING OBJECTS:                             │
-│  obj = ClassName(value)                        │
-│                                                │
-│  INHERITANCE:                                  │
-│  class Child(Parent):                          │
-│      def method(self):                         │
-│          super().method()                      │
-│                                                │
-│  SPECIAL METHODS:                              │
-│  __init__      - Constructor                   │
-│  __str__       - String representation         │
-│  __repr__      - Developer representation      │
-│  __eq__        - Equality comparison           │
-│  __lt__        - Less than comparison          │
-│  __add__       - Addition operator             │
-│                                                │
-│  ENCAPSULATION:                                │
-│  _private      - Protected (convention)        │
-│  __private     - Name mangling                 │
-│  @property     - Getter/Setter                 │
-│                                                │
-│  STATIC/CLASS METHODS:                         │
-│  @staticmethod - No access to instance         │
-│  @classmethod  - Access to class variables     │
-│                                                │
-└────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────┐
+│         FUNCTION QUICK REFERENCE                   │
+├────────────────────────────────────────────────────┤
+│                                                    │
+│  DEFINITION:                                       │
+│  def function_name(parameter):                     │
+│      return result                                 │
+│                                                    │
+│  CALLING:                                          │
+│  function_name(argument)                           │
+│                                                    │
+│  PARAMETERS:                                       │
+│  • Positional:    def func(a, b)                   │
+│  • Default:       def func(a, b=10)                │
+│  • *args:         def func(*args)                  │
+│  • **kwargs:      def func(**kwargs)               │
+│                                                    │
+│  RETURN:                                           │
+│  • Single:        return value                     │
+│  • Multiple:      return a, b, c                   │
+│  • None:          return (no value)                │
+│                                                    │
+│  SCOPE:                                            │
+│  • Local:         Inside function                  │
+│  • Global:        Outside function                 │
+│  • Nonlocal:      In nested functions              │
+│                                                    │
+│  ADVANCED:                                         │
+│  • Recursion:     Function calls itself            │
+│  • Generator:     Uses yield                       │
+│  • Decorator:     @decorator above function        │
+│  • Lambda:        lambda x: x + 1                  │
+│  • Closure:       Function returns function       │
+│                                                    │
+└────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## OOP Principles Summary 📋
+## Summary: Functions Are Your Superpowers 💪
 
 ```
-┌────────────────────────────────────────────────┐
-│    THE 4 PILLARS OF OOP                        │
-├────────────────────────────────────────────────┤
-│                                                │
-│  1️⃣  ENCAPSULATION                             │
-│      Hide internal details, expose interface   │
-│      Keep data safe with getters/setters       │
-│                                                │
-│  2️⃣  INHERITANCE                               │
-│      Child classes inherit from parents        │
-│      Reuse code and extend functionality       │
-│                                                │
-│  3️⃣  POLYMORPHISM                              │
-│      Same method name, different behavior      │
-│      Objects respond to same interface         │
-│                                                │
-│  4️⃣  ABSTRACTION                               │
-│      Hide complexity, show simplicity          │
-│      Use abstract base classes                 │
-│                                                │
-└────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────┐
+│   WHY FUNCTIONS MATTER                           │
+├──────────────────────────────────────────────────┤
+│                                                  │
+│  ✨ REUSABILITY                                  │
+│     Write once, use infinite times               │
+│                                                  │
+│  🎯 CLARITY                                      │
+│     Code tells a story                           │
+│                                                  │
+│  🔧 MAINTAINABILITY                              │
+│     Fix one place, fixes everywhere              │
+│                                                  │
+│  🚀 EFFICIENCY                                   │
+│     Focus on one task at a time                  │
+│                                                  │
+│  🧪 TESTABILITY                                  │
+│     Easy to test individual functions            │
+│                                                  │
+│  📦 MODULARITY                                   │
+│     Build big programs from small pieces         │
+│                                                  │
+└──────────────────────────────────────────────────┘
 ```
 
 ---
@@ -1712,23 +1638,25 @@ class Container:
 ## Practice Exercises
 
 ### Easy Level 🌟
-1. Create a simple `Book` class with title and author
-2. Create a `Car` class with brand and year attributes
-3. Add methods to `Person` class (greet, eat, sleep)
-4. Create a `Rectangle` class and calculate area
+1. Create a function that returns the square of a number
+2. Create a function with default parameters
+3. Create a function that returns multiple values
+4. Create a simple function with *args
 
 ### Medium Level 🌟🌟
-5. Create `Animal` parent class and `Dog`, `Cat` children
-6. Implement dunder methods (__str__, __eq__, __add__)
-7. Create class with static and class methods
-8. Use @property decorator for getters/setters
-9. Implement composition with multiple classes
+5. Create a recursive function for factorial
+6. Create a function that uses map() and filter()
+7. Create a decorator that prints when a function is called
+8. Create a generator for counting
+9. Use lambda with sorted() to sort a list of dictionaries
 
 ### Hard Level 🌟🌟🌟
-10. Create an abstract base class with multiple implementations
-11. Implement multiple inheritance with proper MRO
-12. Create a design pattern (Singleton, Factory, etc.)
-13. Build a complete system (Library, Game, Bank)
-14. Use all 4 OOP pillars in one project
+10. Create a function that returns a closure
+11. Create a memoized recursive function
+12. Create a decorator that measures execution time
+13. Create a data processing pipeline using map/filter/reduce
+14. Implement a function factory pattern
 
 ---
+
+
